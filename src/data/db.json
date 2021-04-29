@@ -1,0 +1,49 @@
+{
+    "acoes": [
+        {
+            "id": 1,
+            "nome": "Apple",
+            "preco": 250.50
+        },
+
+        {
+            "id": 2,
+            "nome": "Google",
+            "preco": 200.30
+        },
+
+        {
+            "id": 3,
+            "nome": "Facebook",
+            "preco": 150
+        },
+
+        {
+            "id": 4,
+            "nome": "Twitter",
+            "preco": 100
+        },
+
+        {
+            "id": 5,
+            "nome": "BMW",
+            "preco": 80
+        },
+
+        {
+            "id": 6,
+            "nome": "Amazon",
+            "preco": 300
+        }
+    ],
+
+    "usuarios": [
+        {
+            "id": 1,
+            "nome": "José",
+            "email": "jose@gmail.com",
+            "senha": "jose123",
+            "acoes": []
+        }
+    ]
+}

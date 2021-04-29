@@ -1,18 +1,21 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div class="home container">
+    <div v-if="$store.state.acoes.length > 0">
+      <Actions :actions="$store.state.acoes" />
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
   name: "Home",
   components: {
-    HelloWorld,
+    Actions: () => import("@/components/Actions.vue"),
+  },
+  created() {
+    this.$store.dispatch("getActions");
   },
 };
 </script>
