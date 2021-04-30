@@ -9,7 +9,7 @@
         <b-collapse id="nav-collapse" is-nav>
           <!-- Right aligned nav items -->
           <b-navbar-nav class="ml-auto">
-            <b-navbar-nav>
+            <b-navbar-nav class="align-items-center">
               <b-nav-item v-if="!$store.state.loggedInUser" to="/login"
                 >Login / Criar Conta</b-nav-item
               >
@@ -20,6 +20,12 @@
               <b-nav-item v-if="$store.state.loggedInUser" to="/minhas-acoes"
                 >Minhas Ações</b-nav-item
               >
+
+              <b-nav-item v-if="$store.state.loggedInUser" href="#">
+                <b-button @click="changeActions" variant="warning"
+                  >Novo Dia</b-button
+                >
+              </b-nav-item>
             </b-navbar-nav>
           </b-navbar-nav>
         </b-collapse>
@@ -34,6 +40,13 @@ import { BNavbar } from "bootstrap-vue";
 export default {
   components: {
     BNavbar,
+  },
+
+  methods: {
+    changeActions() {
+      console.log("alterar acoes");
+      this.$store.dispatch("changeActionsPrice");
+    },
   },
 };
 </script>

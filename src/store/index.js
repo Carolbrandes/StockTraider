@@ -91,6 +91,22 @@ export default new Vuex.Store({
 
       commit("CLEAR_ACAO_SELECIONADA");
     },
+
+    changeActionsPrice({ commit, state, dispatch }) {
+      dispatch("getActions");
+
+      setTimeout(() => {
+        commit(
+          "SET_ACOES",
+          state.acoes.map((acao) =>
+            Object.assign(
+              acao,
+              (acao.preco += Math.random() * (500 - 100) - 100)
+            )
+          )
+        );
+      }, 2000);
+    },
   },
   getters: {
     userAcoes(state) {

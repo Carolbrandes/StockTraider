@@ -14,6 +14,7 @@ export default {
   components: {
     Actions: () => import("@/components/Actions.vue"),
   },
+
   created() {
     this.$store.dispatch("getActions");
   },
