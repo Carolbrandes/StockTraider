@@ -34,15 +34,15 @@
 export default {
   props: ["id", "nome", "preco", "acoesAdquiridas"],
 
-  data(){
-    return{
-      qtdAcoes: 0
-    }
+  data() {
+    return {
+      qtdAcoes: 0,
+    };
   },
 
   methods: {
     changeQuantify() {
-      console.log("alterou a quantidade")
+      console.log("alterou a quantidade");
       this.$store.commit("SET_ACAO_SELECIONADA", { quantidade: this.qtdAcoes });
     },
   },

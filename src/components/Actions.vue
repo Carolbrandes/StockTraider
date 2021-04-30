@@ -1,6 +1,5 @@
 <template>
   <div class="row my-5">
-    {{ $store.state.acaoSelecionada }}
     <div
       class="col-md-4 col-12 mb-4"
       v-for="(action, index) in actions"
@@ -49,7 +48,8 @@ export default {
         ) {
           console.log("comprando acao");
           this.$store.commit("SET_ACAO_SELECIONADA", acao);
-          this.$store.dispatch("buyAction")
+          this.$store.commit("CHANGE_SALDO", { buy: true });
+          this.$store.dispatch("buyAction");
         }
       }
     },

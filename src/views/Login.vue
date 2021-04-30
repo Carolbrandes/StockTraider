@@ -90,6 +90,7 @@ export default {
 
         if (usuario) {
           this.$store.commit("SET_LOGGED_IN_USER", true);
+          this.$store.commit("SET_USER", usuario);
           this.$router.push("/");
         } else {
           this.errorlogin = true;

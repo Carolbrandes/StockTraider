@@ -13,7 +13,13 @@
               <b-nav-item v-if="!$store.state.loggedInUser" to="/login"
                 >Login / Criar Conta</b-nav-item
               >
-              <b-nav-item v-else to="/minhas-acoes">Minhas Ações</b-nav-item>
+              <b-nav-item v-if="$store.state.loggedInUser" href="#"
+                >Olá {{ $store.state.user.nome }} | Saldo:
+                {{ $store.getters.saldo | money }}</b-nav-item
+              >
+              <b-nav-item v-if="$store.state.loggedInUser" to="/minhas-acoes"
+                >Minhas Ações</b-nav-item
+              >
             </b-navbar-nav>
           </b-navbar-nav>
         </b-collapse>

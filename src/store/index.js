@@ -10,6 +10,7 @@ export default new Vuex.Store({
     loggedInUser: false,
     user: {
       minhasAcoes: [],
+      saldo: 0,
     },
     acoes: [],
     acaoSelecionada: {},
@@ -27,6 +28,14 @@ export default new Vuex.Store({
       state.user = Object.assign(state.user, payload);
     },
 
+    CHANGE_SALDO(state, payload) {
+      if (payload.buy) {
+        state.user.saldo -= state.acaoSelecionada.preco;
+      } else {
+        state.user.saldo += state.acaoSelecionada.preco;
+      }
+    },
+
     ADD_MINHAS_ACOES(state, payload) {
       const acaoComprada = state.user.minhasAcoes.find(
         (acao) => acao.id === payload.id
@@ -40,19 +49,17 @@ export default new Vuex.Store({
       }
     },
 
-    REMOVE_MINHAS_ACOES(state, payload){
+    REMOVE_MINHAS_ACOES(state, payload) {
       const acaoVendida = state.user.minhasAcoes.find(
         (acao) => acao.id === payload.id
       );
-      acaoVendida.quantidade -= payload.quantidade
+      acaoVendida.quantidade -= payload.quantidade;
     },
 
-    REMOVE_TODAS_MINHAS_ACOES(state, payload){
-      const IndexAcaoVendida = state.user.minhasAcoes.findIndex(acao => acao.id === payload.id)
-
-      console.log(IndexAcaoVendida)
-
-      state.user.minhasAcoes.slice(IndexAcaoVendida, 1)
+    REMOVE_TODAS_MINHAS_ACOES(state, payload) {
+      state.user.minhasAcoes = state.user.minhasAcoes.filter(
+        (acao) => acao.id !== payload.id
+      );
     },
 
     SET_ACAO_SELECIONADA(state, payload) {
@@ -75,19 +82,23 @@ export default new Vuex.Store({
       commit("CLEAR_ACAO_SELECIONADA");
     },
 
-    sellAction({commit, state}, payload){
-        if(payload.sell === "todas"){
-          commit("REMOVE_TODAS_MINHAS_ACOES", state.acaoSelecionada)
-        }else{
-          commit("REMOVE_MINHAS_ACOES", state.acaoSelecionada)
-        }
+    sellAction({ commit, state }, payload) {
+      if (payload.sell === "todas") {
+        commit("REMOVE_TODAS_MINHAS_ACOES", state.acaoSelecionada);
+      } else {
+        commit("REMOVE_MINHAS_ACOES", state.acaoSelecionada);
+      }
 
-        commit("CLEAR_ACAO_SELECIONADA");
-    }
+      commit("CLEAR_ACAO_SELECIONADA");
+    },
   },
   getters: {
     userAcoes(state) {
       return state.user.minhasAcoes;
+    },
+
+    saldo(state) {
+      return state.user.saldo;
     },
   },
   modules: {},

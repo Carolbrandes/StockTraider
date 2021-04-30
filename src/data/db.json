@@ -43,6 +43,7 @@
             "nome": "José",
             "email": "jose@gmail.com",
             "senha": "jose123",
+            "saldo": 10000,
             "acoes": []
         }
     ]
