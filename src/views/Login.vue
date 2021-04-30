@@ -26,19 +26,27 @@
       <div class="col-md-6 col-12 pb-3">
         <div class="mb-3">
           <label for="nome">Nome</label>
-          <b-form-input id="nome" type="text"></b-form-input>
+          <b-form-input v-model="nome" id="nome" type="text"></b-form-input>
         </div>
         <div class="mb-3">
           <label for="email">E-mail</label>
-          <b-form-input id="email" type="email"></b-form-input>
+          <b-form-input v-model="email" id="email" type="email"></b-form-input>
         </div>
 
         <div class="mb-3">
           <label for="senha">Senha</label>
-          <b-form-input id="senha" type="password"></b-form-input>
+          <b-form-input
+            v-model="senha"
+            id="senha"
+            type="password"
+          ></b-form-input>
         </div>
 
-        <b-button variant="dark">Cadastrar</b-button>
+        <b-button @click="cadastrar" variant="dark">Cadastrar</b-button>
+
+        <b-alert v-if="msgCadastro" class="mt-3" variant="success" show
+          >Usuário Cadastrado</b-alert
+        >
       </div>
     </div>
   </div>
@@ -52,9 +60,20 @@ export default {
   data() {
     return {
       errorlogin: false,
+      msgCadastro: false,
     };
   },
   computed: {
+    nome: {
+      get() {
+        return this.$store.state.user.nome;
+      },
+
+      set(value) {
+        this.$store.commit("SET_USER", { nome: value });
+      },
+    },
+
     email: {
       get() {
         return this.$store.state.user.email;
@@ -95,6 +114,19 @@ export default {
         } else {
           this.errorlogin = true;
         }
+      });
+    },
+
+    cadastrar() {
+      this.$store.commit("SET_USER", {
+        saldo: Math.random() * (100000 - 10000) + 10000,
+      });
+      axios.post(`${api.apiBase}/usuarios`, this.$store.state.user).then(() => {
+        this.msgCadastro = true;
+
+        setTimeout(() => {
+          this.login();
+        }, 2000);
       });
     },
   },
