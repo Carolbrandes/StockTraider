@@ -29,7 +29,7 @@ export default new Vuex.Store({
     },
 
     CHANGE_SALDO(state, payload) {
-      if (payload.buy) {
+      if (payload.buy === true) {
         state.user.saldo -= state.acaoSelecionada.preco;
       } else {
         state.user.saldo += state.acaoSelecionada.preco;

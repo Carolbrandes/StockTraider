@@ -52,6 +52,7 @@ export default {
         this.$store.state.acaoSelecionada.quantidade <= acao.acoesObtidas
       ) {
         console.log("vendendo acao");
+        this.$store.commit("CHANGE_SALDO", { buy: false });
 
         if (this.$store.state.acaoSelecionada.quantidade < acao.acoesObtidas) {
           this.$store.dispatch("sellAction", { sell: "algumas" });
@@ -61,8 +62,6 @@ export default {
           console.log("vendi todas");
           this.$store.dispatch("sellAction", { sell: "todas" });
         }
-
-        this.$store.commit("CHANGE_SALDO", { buy: false });
       }
     },
   },
